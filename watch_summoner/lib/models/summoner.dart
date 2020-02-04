@@ -1,4 +1,3 @@
-
 class Summoner {
   final String id;
   final String accountId;
@@ -8,7 +7,8 @@ class Summoner {
   final String revisionDate;
   final String level;
 
-  Summoner(
+
+  Summoner({
     this.id,
     this.accountId,
     this.puuid,
@@ -16,7 +16,7 @@ class Summoner {
     this.iconId,
     this.revisionDate,
     this.level,
-  );
+  });
 
   Summoner.fromJson(Map<String, dynamic> json)
       : id = json['id'],

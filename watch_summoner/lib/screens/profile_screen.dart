@@ -1,36 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:watch_summoner/components/circular_progress.dart';
-import 'package:watch_summoner/http/http_summoner.dart';
-import 'package:watch_summoner/models/data.dart';
-import 'dart:math';
-
-import 'package:watch_summoner/models/summoner.dart';
+import 'package:watch_summoner/http/http_information.dart';
+import 'package:watch_summoner/models/informationModel.dart';
+import 'package:watch_summoner/models/ranked.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
-//Variaveis usadas no cardScroll
-var cardAspectRatio = 12.0 / 16.0;
-var widgetAspectRatio = cardAspectRatio * 1.2;
-//
-
 class _ProfileScreenState extends State<ProfileScreen> {
-  var currentPage = images.length - 1.0;
-
   @override
   Widget build(BuildContext context) {
-    PageController controller = PageController(initialPage: images.length - 1);
-    controller.addListener(() {
-      setState(() {
-        currentPage = controller.page;
-      });
-    });
-
-    return FutureBuilder<Summoner>(
-      future: getSummonerCredentials('houtebeen'),
+    return FutureBuilder<InformationModel>(
+      future: getAllInformation('houtebeen'),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
@@ -41,7 +25,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           case ConnectionState.active:
             break;
           case ConnectionState.done:
-            final Summoner summoner = snapshot.data;
             return Container(
               child: Scaffold(
                 backgroundColor: Colors.white70,
@@ -50,22 +33,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     children: <Widget>[
                       Stack(
                         children: <Widget>[
-                          _BackgroundCircularImageChampion(),
-                          _BadgeProfileIcon(summoner),
-                          _TextSummonerName(summoner),
-                          _TextSummonerLevel(summoner),
-                          _TextSummonerRegion(summoner),
-                          _TextSummonerKDA(summoner),
-                          _BadgeRankSummoner(summoner),
+                          _BackgroundCircularImageChampion(snapshot.data),
+                          _BadgeProfileIcon(snapshot.data),
+                          _TextSummonerName(snapshot.data),
+                          _TextSummonerLevel(snapshot.data),
+                          _TextSummonerRegion(snapshot.data),
+                          _TextSummonerKDA(snapshot.data),
+                          _BadgeRankSummoner(snapshot.data),
                           _TextRankSummoner(),
                         ],
                       ),
-                      _TopSummonerChamps(summoner),
+                      _TopSummonerChamps(snapshot.data),
                       SizedBox(
                         height: 45.0,
                       ),
                       _TextLastGames(),
-                      _CardScrollLastGames(currentPage, controller),
+                      _LastGamesScroll(snapshot.data),
                     ],
                   ),
                 ),
@@ -80,36 +63,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
 }
 
 class _TopSummonerChamps extends StatelessWidget {
-  final Summoner summoner;
+  final InformationModel informationModel;
 
-  _TopSummonerChamps(this.summoner);
+  _TopSummonerChamps(this.informationModel);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 15.0),
-      height: 100.0,
+      height: 120.0,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: 3,
         itemBuilder: (BuildContext context, int index) {
           return Container(
-            margin: EdgeInsets.all(10.0),
-            width: 100.0,
+            margin: EdgeInsets.all(15.0),
+            width: 90.0,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(5.0),
               color: Colors.black,
               image: DecorationImage(
-                image: AssetImage('assets/img/Aatrox_8.jpg'),
-                fit: BoxFit.cover,
+                image: NetworkImage(
+                    'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${informationModel.champions[index].id}.png'),
+                fit: BoxFit.fill,
               ),
             ),
             child: Row(
               children: <Widget>[
                 Container(
-                  transform: Matrix4.translationValues(25.0, 40.0, 0.0),
+                  transform: Matrix4.translationValues(20.0, 50.0, 0.0),
                   child: Image(
-                    image: AssetImage('assets/img/masteryIcon.png'),
+                    image: NetworkImage(
+                        'https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-profiles/global/default/mastery_level${informationModel.champions[index].level}.png'),
                     width: 50.0,
                     height: 50.0,
                   ),
@@ -123,28 +108,36 @@ class _TopSummonerChamps extends StatelessWidget {
   }
 }
 
-class _CardScrollLastGames extends StatelessWidget {
-  final currentPage;
-  final PageController controller;
+class _LastGamesScroll extends StatelessWidget {
+  final InformationModel informationModel;
 
-  _CardScrollLastGames(this.currentPage, this.controller);
+  _LastGamesScroll(this.informationModel);
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        CardScrollWidget(currentPage),
-        Positioned.fill(
-          child: PageView.builder(
-            itemCount: images.length,
-            controller: controller,
-            reverse: true,
-            itemBuilder: (context, index) {
-              return Container();
-            },
-          ),
-        )
-      ],
+    return Container(
+      margin: EdgeInsets.only(top: 15.0),
+      height: 200.0,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: informationModel.lastPlayedGame.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            margin: EdgeInsets.all(15.0),
+            padding: EdgeInsets.only(bottom: 45.0),
+            width: 90.0,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.0),
+              color: Colors.black,
+              image: DecorationImage(
+                image: NetworkImage(
+                    'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${informationModel.lastPlayedGame[index].champion}.png'),
+                fit: BoxFit.fill,
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }
@@ -166,9 +159,9 @@ class _TextLastGames extends StatelessWidget {
 }
 
 class _BadgeRankSummoner extends StatelessWidget {
-  final Summoner summoner;
+  final InformationModel informationModel;
 
-  _BadgeRankSummoner(this.summoner);
+  _BadgeRankSummoner(this.informationModel);
 
   @override
   Widget build(BuildContext context) {
@@ -185,11 +178,13 @@ class _BadgeRankSummoner extends StatelessWidget {
                 child: ClipShadowPath(
                   shadow: Shadow(blurRadius: 16.0),
                   clipper: CircularClipper(),
-                  child: Image(
+                  child: Container(
                     height: 75.0,
                     width: 66.0,
-                    fit: BoxFit.cover,
-                    image: AssetImage('assets/img/Emblem_Bronze.png'),
+                    child: Image.network(
+                      getBadgeString(informationModel.rankedSts, 'TFT'),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -201,11 +196,13 @@ class _BadgeRankSummoner extends StatelessWidget {
                 child: ClipShadowPath(
                   shadow: Shadow(blurRadius: 16.0),
                   clipper: CircularClipper(),
-                  child: Image(
+                  child: Container(
                     height: 75.0,
                     width: 66.0,
-                    fit: BoxFit.cover,
-                    image: AssetImage('assets/img/Emblem_Challenger.png'),
+                    child: Image.network(
+                      getBadgeString(informationModel.rankedSts, 'SOLO'),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -217,11 +214,13 @@ class _BadgeRankSummoner extends StatelessWidget {
                 child: ClipShadowPath(
                   shadow: Shadow(blurRadius: 16.0),
                   clipper: CircularClipper(),
-                  child: Image(
+                  child: Container(
                     height: 75.0,
                     width: 66.0,
-                    fit: BoxFit.cover,
-                    image: AssetImage('assets/img/Emblem_Bronze.png'),
+                    child: Image.network(
+                      getBadgeString(informationModel.rankedSts, 'FLEX'),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -230,6 +229,23 @@ class _BadgeRankSummoner extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String getBadgeString(List<Ranked> rankedSts, String queue) {
+    String badgeUrl = '';
+    for (int i = 0; i < rankedSts.length; i++) {
+      if (rankedSts[i].queueType.contains(queue)) {
+        badgeUrl =
+            'http://raw.communitydragon.org/pbe/game/assets/ux/tftmobile/particles/tft_regalia_${informationModel.rankedSts[i].tier}.tftm.png';
+        break;
+      }
+      ;
+    }
+    if (badgeUrl == '') {
+      badgeUrl =
+          'http://raw.communitydragon.org/pbe/plugins/rcp-fe-lol-profiles/global/default/profile_unranked.png';
+    }
+    return badgeUrl;
   }
 }
 
@@ -262,9 +278,9 @@ class _TextRankSummoner extends StatelessWidget {
 }
 
 class _TextSummonerKDA extends StatelessWidget {
-  final Summoner summoner;
+  final InformationModel informationModel;
 
-  _TextSummonerKDA(this.summoner);
+  _TextSummonerKDA(this.informationModel);
 
   @override
   Widget build(BuildContext context) {
@@ -272,24 +288,36 @@ class _TextSummonerKDA extends StatelessWidget {
       child: Align(
         alignment: Alignment.center,
         child: Container(
-          transform: Matrix4.translationValues(100.0, -50.0, 0.0),
-          child: Text(
-            '     KDA\n   6 | 5 | 8 \n 24W - 19L',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16.0,
-            ),
-          ),
+          transform: Matrix4.translationValues(110.0, -50.0, 0.0),
+          child: getTextKDASoloQueue(informationModel.rankedSts),
         ),
+      ),
+    );
+  }
+
+  Widget getTextKDASoloQueue(List<Ranked> rankedSts) {
+    String kda = '';
+    for (int i = 0; i < rankedSts.length; i++) {
+      if (rankedSts[i].queueType.contains('SOLO')) {
+        kda =
+            '     KDA\n   6 | 5 | 8 \n ${rankedSts[i].wins}W - ${rankedSts[i].losses}L';
+        break;
+      }
+    }
+    return Text(
+      kda,
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 16.0,
       ),
     );
   }
 }
 
 class _TextSummonerRegion extends StatelessWidget {
-  final Summoner summoner;
+  final InformationModel informationModel;
 
-  _TextSummonerRegion(this.summoner);
+  _TextSummonerRegion(this.informationModel);
 
   @override
   Widget build(BuildContext context) {
@@ -297,7 +325,7 @@ class _TextSummonerRegion extends StatelessWidget {
       child: Align(
         alignment: Alignment.center,
         child: Container(
-          transform: Matrix4.translationValues(-100.0, -70.0, 0.0),
+          transform: Matrix4.translationValues(-110.0, -70.0, 0.0),
           child: Text(
             'Brasil',
             style: TextStyle(
@@ -312,9 +340,9 @@ class _TextSummonerRegion extends StatelessWidget {
 }
 
 class _TextSummonerLevel extends StatelessWidget {
-  final Summoner summoner;
+  final InformationModel informationModel;
 
-  _TextSummonerLevel(this.summoner);
+  _TextSummonerLevel(this.informationModel);
 
   @override
   Widget build(BuildContext context) {
@@ -322,9 +350,9 @@ class _TextSummonerLevel extends StatelessWidget {
       child: Align(
         alignment: Alignment.center,
         child: Container(
-          transform: Matrix4.translationValues(-100.0, -50.0, 0.0),
+          transform: Matrix4.translationValues(-110.0, -40.0, 0.0),
           child: Text(
-            'Nivel ${summoner.level}',
+            'Nivel ${informationModel.summoner.level}',
             style: TextStyle(
               color: Colors.white,
               fontSize: 16.0,
@@ -337,22 +365,28 @@ class _TextSummonerLevel extends StatelessWidget {
 }
 
 class _BackgroundCircularImageChampion extends StatelessWidget {
+  final InformationModel informationModel;
+
+  _BackgroundCircularImageChampion(this.informationModel);
+
   @override
   Widget build(BuildContext context) {
     return Container(
       transform: Matrix4.translationValues(0.0, -50.0, 0.0),
-      child: Hero(
-        tag: 'profile_picture',
-        child: ClipShadowPath(
-          shadow: Shadow(blurRadius: 20.0),
-          clipper: CircularClipper(),
-          child: Opacity(
-            opacity: 0.4,
-            child: Image(
-              height: 250.0,
-              width: double.infinity,
-              fit: BoxFit.cover,
-              image: AssetImage('assets/img/Aatrox_8.jpg'),
+      child: Container(
+        height: 250.0,
+        width: double.infinity,
+        child: Hero(
+          tag: 'profile_picture',
+          child: ClipShadowPath(
+            shadow: Shadow(blurRadius: 0.0),
+            clipper: CircularClipper(),
+            child: Opacity(
+              opacity: 0.4,
+              child: Image.network(
+                'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-splashes/${informationModel.champions[0].id}/${informationModel.champions[0].id}000.jpg',
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
@@ -362,10 +396,9 @@ class _BackgroundCircularImageChampion extends StatelessWidget {
 }
 
 class _BadgeProfileIcon extends StatelessWidget {
+  final InformationModel informationModel;
 
-  final Summoner summoner;
-
-  _BadgeProfileIcon(this.summoner);
+  _BadgeProfileIcon(this.informationModel);
 
   @override
   Widget build(BuildContext context) {
@@ -375,10 +408,10 @@ class _BadgeProfileIcon extends StatelessWidget {
         child: Container(
           transform: Matrix4.translationValues(0.0, -65.0, 0.0),
           child: ClipShadowPath(
-            shadow: Shadow(blurRadius: 0.0, color: Colors.white),
+            shadow: Shadow(blurRadius: 10.0, color: Colors.white),
             clipper: CircularClipper(),
             child: Image.network(
-              'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${summoner.iconId}.jpg',
+              'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${informationModel.summoner.iconId}.jpg',
               width: 100,
               height: 100,
               fit: BoxFit.cover,
@@ -391,9 +424,9 @@ class _BadgeProfileIcon extends StatelessWidget {
 }
 
 class _TextSummonerName extends StatelessWidget {
-  final Summoner summoner;
+  final InformationModel informationModel;
 
-  _TextSummonerName(this.summoner);
+  _TextSummonerName(this.informationModel);
 
   @override
   Widget build(BuildContext context) {
@@ -401,9 +434,9 @@ class _TextSummonerName extends StatelessWidget {
       child: Align(
         alignment: Alignment.center,
         child: Container(
-          transform: Matrix4.translationValues(0.0, -2.0, 0.0),
+          transform: Matrix4.translationValues(0.0, 1.0, 0.0),
           child: Text(
-            summoner.name,
+            informationModel.summoner.name,
             style: TextStyle(
               color: Colors.orange,
               fontSize: 24.0,
@@ -412,112 +445,6 @@ class _TextSummonerName extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class CardScrollWidget extends StatelessWidget {
-  var currentPage;
-  var padding = 40.0;
-  var verticalInset = 20.0;
-
-  CardScrollWidget(this.currentPage);
-
-  @override
-  Widget build(BuildContext context) {
-    return new AspectRatio(
-      aspectRatio: widgetAspectRatio,
-      child: LayoutBuilder(builder: (context, constraints) {
-        var width = constraints.maxWidth;
-        var heigth = constraints.maxHeight;
-
-        var safeWidth = width - 2 * padding;
-        var safeHeigth = heigth - 2 * padding;
-
-        var heigthOfPrimaryCard = safeHeigth;
-        var widthOfPrimaryCard = heigthOfPrimaryCard * cardAspectRatio;
-
-        var primaryCardLeft = safeWidth - widthOfPrimaryCard;
-        var horizontalInset = primaryCardLeft / 2;
-
-        List<Widget> cardList = new List();
-
-        for (var i = 0; i < images.length; i++) {
-          var delta = i - currentPage;
-          var isOnRight = delta > 0;
-          var start = padding +
-              max(
-                  primaryCardLeft -
-                      horizontalInset * -delta * (isOnRight ? 15 : 1),
-                  0.0);
-          var cardItem = Positioned.directional(
-            top: padding - 10.0 + verticalInset * max(-delta, 0.0),
-            bottom: padding + verticalInset * max(-delta, 0.0),
-            start: start,
-            textDirection: TextDirection.rtl,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16.0),
-              child: Container(
-                decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                  BoxShadow(
-                      color: Colors.black12,
-                      offset: Offset(3.0, 6.0),
-                      blurRadius: 10.0)
-                ]),
-                child: AspectRatio(
-                  aspectRatio: cardAspectRatio,
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: <Widget>[
-                      Image.asset(images[i], fit: BoxFit.cover),
-                      Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 80.0, vertical: 8.0),
-                              child: Text(
-                                title[i],
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20.0,
-                                    fontFamily: "SF-Pro-Text-Regular"),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 12.0, bottom: 12.0),
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 22.0, vertical: 6.0),
-                                decoration: BoxDecoration(
-                                    color: Colors.blueAccent,
-                                    borderRadius: BorderRadius.circular(20.0)),
-                                child: Text("Read",
-                                    style: TextStyle(color: Colors.white)),
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          );
-          cardList.add(cardItem);
-        }
-        return Stack(
-          children: cardList,
-        );
-      }),
     );
   }
 }
