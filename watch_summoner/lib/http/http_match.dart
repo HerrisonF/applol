@@ -15,8 +15,6 @@ Future<List<LastPlayedGame>> getLastPlayedGames(
 
   final dynamic decodedJson = jsonDecode(response.body);
   final List<dynamic> list = decodedJson['matches'];
-//  print("AQUI O PRINT:" + decodedJson['matches'].toString());
-//  print("AQUI A OUTRA LISTA" + list.toString());
   return list.map(
     (dynamic json) {
       return LastPlayedGame.fromJson(json);

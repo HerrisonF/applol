@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class LastPlayedGame {
 
   final String platformId;
@@ -26,7 +28,7 @@ class LastPlayedGame {
         queue = json['queue'].toString(),
         champion = json['champion'].toString(),
         season = json['season'].toString(),
-        timestamp = json['timestamp'].toString(),
+        timestamp =  new DateFormat('dd-MM-yyyy').format(new DateTime.fromMicrosecondsSinceEpoch(json['timestamp'] * 1000)).toString(),
         role = json['role'].toString(),
         lane = json['lane'].toString();
 

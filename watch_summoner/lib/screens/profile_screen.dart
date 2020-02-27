@@ -4,17 +4,18 @@ import 'package:watch_summoner/components/circular_progress.dart';
 import 'package:watch_summoner/http/http_information.dart';
 import 'package:watch_summoner/models/informationModel.dart';
 import 'package:watch_summoner/models/ranked.dart';
+import 'package:watch_summoner/screens/detail_match_screen.dart';
 
-class ProfileScreen extends StatefulWidget {
-  @override
-  _ProfileScreenState createState() => _ProfileScreenState();
-}
+class ProfileScreen extends StatelessWidget {
+  final String summonerName;
 
-class _ProfileScreenState extends State<ProfileScreen> {
+  ProfileScreen(this.summonerName);
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<InformationModel>(
-      future: getAllInformation('houtebeen'),
+      future:
+          getAllInformation(summonerName != '' ? summonerName : 'houtebeen'),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
@@ -25,32 +26,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
           case ConnectionState.active:
             break;
           case ConnectionState.done:
-            return Container(
-              child: Scaffold(
-                backgroundColor: Colors.white70,
-                body: SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      Stack(
-                        children: <Widget>[
-                          _BackgroundCircularImageChampion(snapshot.data),
-                          _BadgeProfileIcon(snapshot.data),
-                          _TextSummonerName(snapshot.data),
-                          _TextSummonerLevel(snapshot.data),
-                          _TextSummonerRegion(snapshot.data),
-                          _TextSummonerKDA(snapshot.data),
-                          _BadgeRankSummoner(snapshot.data),
-                          _TextRankSummoner(),
-                        ],
-                      ),
-                      _TopSummonerChamps(snapshot.data),
-                      SizedBox(
-                        height: 45.0,
-                      ),
-                      _TextLastGames(),
-                      _LastGamesScroll(snapshot.data),
-                    ],
-                  ),
+            return Scaffold(
+              backgroundColor: Colors.white70,
+              body: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    Stack(
+                      children: <Widget>[
+                        _BackgroundCircularImageChampion(snapshot.data),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: IconButton(
+                                icon: Icon(Icons.arrow_back),
+                                color: Colors.white,
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            )
+                          ],
+                        ),
+                        _BadgeProfileIcon(snapshot.data),
+                        _TextSummonerName(snapshot.data),
+                        _TextSummonerLevel(snapshot.data),
+                        _TextSummonerRegion(snapshot.data),
+                        _TextSummonerKDA(snapshot.data),
+                        _BadgeRankSummoner(snapshot.data),
+                        _TextRankSummoner(),
+                      ],
+                    ),
+                    _TopSummonerChamps(snapshot.data),
+                    SizedBox(
+                      height: 45.0,
+                    ),
+                    _TextLastGames(),
+                    _LastGamesScroll(snapshot.data),
+                  ],
                 ),
               ),
             );
@@ -116,24 +130,90 @@ class _LastGamesScroll extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 15.0),
+      //margin: EdgeInsets.only(top: 15.0),
       height: 200.0,
       child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: informationModel.lastPlayedGame.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            margin: EdgeInsets.all(15.0),
-            padding: EdgeInsets.only(bottom: 45.0),
-            width: 90.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5.0),
-              color: Colors.black,
-              image: DecorationImage(
-                image: NetworkImage(
-                    'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${informationModel.lastPlayedGame[index].champion}.png'),
-                fit: BoxFit.fill,
+            scrollDirection: Axis.horizontal,
+            itemCount: informationModel.lastPlayedGame.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Padding(
+            padding: EdgeInsets.all(8.0),
+            child: GestureDetector(
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    child: Container(
+                      height: 200.0,
+                      width: 140.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16.0),
+                        color: Colors.black,
+                        image: DecorationImage(
+                          image: NetworkImage(
+                              'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${informationModel.lastPlayedGame[index].champion}.png'),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Column(
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.only(top: 5.0),
+                        width: 140.0,
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Vitória',
+                            style: TextStyle(
+                              shadows: [
+                                Shadow(
+                                  color: Colors.black,
+                                  blurRadius: 3.0,
+                                ),
+                              ],
+                              color: Colors.orange,
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Spacer(),
+                      Container(
+                        margin: EdgeInsets.only(bottom: 5.0),
+                        width: 140.0,
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            '${informationModel.lastPlayedGame[index].timestamp}',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              shadows: [
+                                Shadow(
+                                  color: Colors.black,
+                                  blurRadius: 3.0,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailMatchScreen(
+                        informationModel.lastPlayedGame[index].gameId,
+                        informationModel.lastPlayedGame[index].champion),
+                  ),
+                );
+              },
             ),
           );
         },

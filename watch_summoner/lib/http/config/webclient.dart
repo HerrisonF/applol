@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 import 'Interceptor.dart';
 
 final String baseUrl = 'https://br1.api.riotgames.com/';
-final String token = 'RGAPI-5a712fad-dda0-4eb2-bd5f-855e896b0005';
+final String token = 'RGAPI-06710284-959b-4146-b7d4-5ced75c7ddff';
 final LoggingInterceptor loggingInterceptor = new LoggingInterceptor();
 
 final Map<String, String> headers = {
@@ -23,7 +23,7 @@ Future<dynamic> getWebClient(path, param) async {
   return decodedJson;
 }
 
-Future<List<dynamic>> getListWebClient(path, param) async {
+Future<List<dynamic>> getListWebClient(path, {param}) async {
 
   final Response response = await loggingInterceptor.getInterceptorClient().get(
     baseUrl+path+param,

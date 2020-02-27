@@ -21,10 +21,13 @@ dependencies:
     sdk: flutter
   http:
   http_interceptor:
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   curved_navigation_bar: ^0.3.1
+  flutter_html: ^0.8.2
+  json_annotation: ^3.0.1 #Usados para formatar o json automaticamente
+  build_runner: ^1.7.4 #Usados para formatar o json automaticamente
+  json_serializable: ^3.2.5 #Usados para formatar o json automaticamente
+  intl: 0.15.7 #biblioteca usada para o dateformat
 
 dev_dependencies:
   flutter_test:
