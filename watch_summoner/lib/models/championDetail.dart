@@ -3,6 +3,8 @@ import 'package:watch_summoner/models/champInfo.dart';
 import 'package:watch_summoner/models/passive.dart';
 import 'package:watch_summoner/models/stats.dart';
 
+import 'spell.dart';
+
 part 'championDetail.g.dart';
 
 @JsonSerializable()
@@ -15,6 +17,7 @@ class ChampionDetail {
   List<String> allyTips;
   List<String> enemyTips;
   List<String> tags;
+  List<Spell> spells;
   ChampInfo champInfo;
   Stats stats;
   Passive passive;
@@ -38,5 +41,6 @@ class ChampionDetail {
     'info': instance.champInfo,
     'stats': instance.stats,
     'passive': instance.passive,
+    'spells':instance.spells.map((v) => v.toJson()).toList(),
   };
 }

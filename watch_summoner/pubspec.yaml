@@ -53,6 +53,10 @@ flutter:
     - assets/img/Emblem_Challenger.png
     - assets/img/Emblem_Master.png
     - assets/img/icon_profile.png
+    - assets/img/manaregen_icon.png
+    - assets/img/mana_icon.png
+    - assets/img/healthregen_icon.png
+    - assets/img/movespeed_icon.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

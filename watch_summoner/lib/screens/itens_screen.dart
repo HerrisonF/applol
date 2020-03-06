@@ -39,7 +39,9 @@ class _ItensScreenState extends State<ItensScreen> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: ExpansionTile(
-                              subtitle: Text(utf8.decode(snapshot.data[index].plaintext.runes.toList())),
+                              subtitle: Text(utf8.decode(snapshot
+                                  .data[index].plaintext.runes
+                                  .toList())),
                               leading: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
                                 child: Image.network(
@@ -47,18 +49,20 @@ class _ItensScreenState extends State<ItensScreen> {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              title: Text(utf8.decode(snapshot.data[index].name.runes.toList())),
+                              title: Text(utf8.decode(
+                                  snapshot.data[index].name.runes.toList())),
                               children: <Widget>[
                                 Container(
                                   child: Padding(
                                     padding: EdgeInsets.all(24.0),
                                     child: Html(
-                                      data: utf8.decode(snapshot.data[index].description
-                                          .replaceAll("<stats>", "")
-                                          .replaceAll("<\/stats>", "")
-                                          .replaceAll("<mana>", "")
-                                          .replaceAll("<\/mana>", "").runes.toList(),
-                                    )),
+                                      data: utf8.decode(
+                                        snapshot.data[index].description
+                                        .replaceRange(snapshot.data[index].description.indexOf('<'), snapshot.data[index].description.indexOf('>')+1, "")
+                                            .runes
+                                            .toList(),
+                                      ),
+                                    ),
                                   ),
                                   width: MediaQuery.of(context).size.width,
                                   color: Colors.grey[200],

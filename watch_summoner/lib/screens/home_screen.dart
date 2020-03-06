@@ -4,8 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:watch_summoner/screens/champion_detail_screen.dart';
 
 import 'package:watch_summoner/screens/champions_screen.dart';
+import 'package:watch_summoner/screens/detail_match_screen.dart';
 import 'package:watch_summoner/screens/gems_screen.dart';
 import 'package:watch_summoner/screens/itens_screen.dart';
+import 'package:watch_summoner/screens/running_game_screen.dart';
 import 'package:watch_summoner/screens/summoners_screen.dart';
 import 'package:watch_summoner/screens/profile_screen.dart';
 
@@ -23,7 +25,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     //ItensScreen(),
     //GemsScreen(),
     //ChampionsScreen(),
-    ChampionDetailScreen('Ryze'),
+    //ChampionDetailScreen('Rengar'),
+    RunningGame(),
   ];
 
   List<Widget> tabItems = List.of([

@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:watch_summoner/components/circular_progress.dart';
+import 'package:watch_summoner/components/spell_text.dart';
 import 'package:watch_summoner/http/http_champion.dart';
 import 'package:watch_summoner/models/championDetail.dart';
 
@@ -87,7 +92,7 @@ class ChampionDetailScreen extends StatelessWidget {
                                   child: Column(
                                     children: <Widget>[
                                       Image.network(
-                                        'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_2_mage.png',
+                                        'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_2_${snapshot.data.tags[0].toLowerCase()}.png',
                                       ),
                                       Text(
                                         'Role',
@@ -140,7 +145,10 @@ class ChampionDetailScreen extends StatelessWidget {
                                   children: <Widget>[
                                     Row(
                                       children: <Widget>[
-                                        Icon(Icons.clear_all),
+                                        Image.network(
+                                          'https://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/statmods/statmodshealthscalingicon.png',
+                                          height: 20.0,
+                                        ),
                                         Padding(
                                           padding: EdgeInsets.all(8.0),
                                           child: Text(
@@ -179,7 +187,10 @@ class ChampionDetailScreen extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
-                                        Icon(Icons.clear_all),
+                                        Image.asset(
+                                          'assets/img/healthregen_icon.png',
+                                          height: 20.0,
+                                        ),
                                         Padding(
                                           padding: EdgeInsets.only(
                                               right: 24.0,
@@ -227,7 +238,10 @@ class ChampionDetailScreen extends StatelessWidget {
                                   children: <Widget>[
                                     Row(
                                       children: <Widget>[
-                                        Icon(Icons.clear_all),
+                                        Image.network(
+                                          'https://raw.communitydragon.org/pbe/game/assets/perks/statmods/statmodsattackdamageicon.png',
+                                          height: 20.0,
+                                        ),
                                         Padding(
                                           padding: EdgeInsets.all(8.0),
                                           child: Text(
@@ -266,7 +280,10 @@ class ChampionDetailScreen extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
-                                        Icon(Icons.clear_all),
+                                        Image.network(
+                                          'https://raw.communitydragon.org/pbe/game/assets/perks/statmods/statmodsattackspeedicon.png',
+                                          height: 20.0,
+                                        ),
                                         Padding(
                                           padding: EdgeInsets.only(
                                               right: 24.0,
@@ -309,12 +326,15 @@ class ChampionDetailScreen extends StatelessWidget {
                             children: <Widget>[
                               Container(
                                 padding:
-                                    EdgeInsets.only(left: 16.0, bottom: 16.0),
+                                    EdgeInsets.only(left: 24.0, bottom: 16.0),
                                 child: Column(
                                   children: <Widget>[
                                     Row(
                                       children: <Widget>[
-                                        Icon(Icons.clear_all),
+                                        Image.network(
+                                          'https://raw.communitydragon.org/pbe/game/assets/perks/statmods/statmodsmagicresicon.png',
+                                          height: 20.0,
+                                        ),
                                         Padding(
                                           padding: EdgeInsets.all(8.0),
                                           child: Text(
@@ -348,14 +368,17 @@ class ChampionDetailScreen extends StatelessWidget {
                               ),
                               Container(
                                 padding:
-                                    EdgeInsets.only(right: 16.0, bottom: 16.0),
+                                    EdgeInsets.only(right: 24.0, bottom: 16.0),
                                 child: Column(
                                   children: <Widget>[
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
-                                        Icon(Icons.clear_all),
+                                        Image.network(
+                                          'https://raw.communitydragon.org/pbe/game/assets/perks/statmods/statmodsarmoricon.png',
+                                          height: 20.0,
+                                        ),
                                         Padding(
                                           padding: EdgeInsets.only(
                                               right: 24.0,
@@ -398,12 +421,15 @@ class ChampionDetailScreen extends StatelessWidget {
                             children: <Widget>[
                               Container(
                                 padding:
-                                EdgeInsets.only(left: 16.0, bottom: 16.0),
+                                    EdgeInsets.only(left: 16.0, bottom: 16.0),
                                 child: Column(
                                   children: <Widget>[
                                     Row(
                                       children: <Widget>[
-                                        Icon(Icons.clear_all),
+                                        Image.asset(
+                                          'assets/img/mana_icon.png',
+                                          height: 20.0,
+                                        ),
                                         Padding(
                                           padding: EdgeInsets.all(8.0),
                                           child: Text(
@@ -437,14 +463,17 @@ class ChampionDetailScreen extends StatelessWidget {
                               ),
                               Container(
                                 padding:
-                                EdgeInsets.only(right: 16.0, bottom: 16.0),
+                                    EdgeInsets.only(right: 16.0, bottom: 16.0),
                                 child: Column(
                                   children: <Widget>[
                                     Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
-                                        Icon(Icons.clear_all),
+                                        Image.asset(
+                                          'assets/img/manaregen_icon.png',
+                                          height: 20.0,
+                                        ),
                                         Padding(
                                           padding: EdgeInsets.only(
                                               right: 24.0,
@@ -487,12 +516,15 @@ class ChampionDetailScreen extends StatelessWidget {
                             children: <Widget>[
                               Container(
                                 padding:
-                                EdgeInsets.only(left: 16.0, bottom: 16.0),
+                                    EdgeInsets.only(left: 16.0, bottom: 16.0),
                                 child: Column(
                                   children: <Widget>[
                                     Row(
                                       children: <Widget>[
-                                        Icon(Icons.clear_all),
+                                        Image.network(
+                                          'https://raw.communitydragon.org/pbe/game/data/images/ui/floatingcombattext/criticon.png',
+                                          height: 20.0,
+                                        ),
                                         Padding(
                                           padding: EdgeInsets.all(8.0),
                                           child: Text(
@@ -526,14 +558,17 @@ class ChampionDetailScreen extends StatelessWidget {
                               ),
                               Container(
                                 padding:
-                                EdgeInsets.only(right: 16.0, bottom: 16.0),
+                                    EdgeInsets.only(right: 16.0, bottom: 16.0),
                                 child: Column(
                                   children: <Widget>[
                                     Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
-                                        Icon(Icons.clear_all),
+                                        Image.asset(
+                                          'assets/img/movespeed_icon.png',
+                                          height: 20.0,
+                                        ),
                                         Padding(
                                           padding: EdgeInsets.only(
                                               right: 24.0,
@@ -560,58 +595,61 @@ class ChampionDetailScreen extends StatelessWidget {
                             ],
                           ),
                           Container(
+                            padding: EdgeInsets.only(top: 8.0),
                             width: MediaQuery.of(context).size.width,
-                            height: 10.0,
+                            height: 26.0,
                             child: Container(
                               child: Image.network(
-                                  'https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-uikit/global/default/images/celebration-linework-outer.png'),
+                                  'https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-uikit/global/default/images/celebration-linework-mid.png'),
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Container(
-                                padding:
-                                EdgeInsets.only(left: 16.0, bottom: 16.0),
-                                child: Column(
-                                  children: <Widget>[
-                                    Row(
-                                      children: <Widget>[
-                                        Icon(Icons.clear_all),
-                                        Padding(
-                                          padding: EdgeInsets.all(8.0),
-                                          child: Text(
-                                            'Attack Range',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(left: 24.0),
-                                      child: Text(
-                                        '${snapshot.data.stats.attackrange}',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              'Passive - ${snapshot.data.passive.name}',
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 16.0),
+                            ),
                           ),
                           Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 10.0,
-                            child: Container(
-                              child: Image.network(
-                                  'https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-uikit/global/default/images/celebration-linework-outer.png'),
+                            child: Image.network(
+                                'http://ddragon.leagueoflegends.com/cdn/10.5.1/img/passive/${snapshot.data.name}_P.png'),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Html(
+                              data: utf8.decode(
+                                '${snapshot.data.passive.description.replaceRange(snapshot.data.passive.description.indexOf('<'), snapshot.data.passive.description.indexOf('>') + 1, "")}'
+                                    .runes
+                                    .toList(),
+                              ),
+                              defaultTextStyle: TextStyle(color: Colors.white),
                             ),
                           ),
+                          Container(
+                            padding: EdgeInsets.only(top: 8.0),
+                            width: MediaQuery.of(context).size.width,
+                            height: 26.0,
+                            child: Container(
+                              child: Image.network(
+                                  'https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-uikit/global/default/images/celebration-linework-mid.png'),
+                            ),
+                          ),
+                          Center(
+                            child: Padding(
+                              padding: EdgeInsets.only(bottom: 16.0),
+                              child: Text(
+                                'ABILITIES',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SpellText(
+                              key: Key('championSpell'),
+                              spells: snapshot.data.spells),
                         ],
                       ),
                     )

@@ -60,18 +60,6 @@ class _ChampionsScreenState extends State<ChampionsScreen> {
     );
   }
 
-//  ExpansionTile(
-//  subtitle: getRoles(
-//  snapshot.data[index],
-//  ),
-//  leading: ClipRRect(
-//  borderRadius: BorderRadius.circular(8.0),
-//  child: Image.network(
-//  'https://cdn.communitydragon.org/latest/champion/${snapshot.data[index].id}/square'),
-//  ),
-//  title: Text(utf8.decode(snapshot.data[index].name.runes.toList())),
-//  ),
-
   Text getRoles(ChampionSummary snapshot) {
     String role = '';
     for (int i = 0; i < snapshot.roles.length; i++) {

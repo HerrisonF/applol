@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 import 'Interceptor.dart';
 
 final String baseUrl = 'https://br1.api.riotgames.com/';
-final String token = 'RGAPI-06710284-959b-4146-b7d4-5ced75c7ddff';
+final String token = 'RGAPI-4eea15c7-af4e-471f-881b-2c825c9aa3b4';
 final LoggingInterceptor loggingInterceptor = new LoggingInterceptor();
 
 final Map<String, String> headers = {

@@ -54,6 +54,5 @@ Future<ChampionDetail> getChampionDetail(String nameChamp) async {
 
   dynamic json = jsonDecode(response.body);
   Map<String, dynamic> json2 = json['data'][nameChamp];
-  //print('AQUI O OBJ:' + championDetail.name);
   return ChampionDetail.fromJson(json2);
 }

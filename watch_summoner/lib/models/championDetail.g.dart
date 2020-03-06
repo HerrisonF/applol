@@ -25,7 +25,9 @@ ChampionDetail _$ChampionDetailFromJson(Map<String, dynamic> json) {
     json['passive'] == null
         ? null
         : Passive.fromJson(json['passive'] as Map<String, dynamic>),
-  );
+  )..spells = (json['spells'] as List)
+      ?.map((e) => e == null ? null : Spell.fromJson(e as Map<String, dynamic>))
+      ?.toList();
 }
 
 Map<String, dynamic> _$ChampionDetailToJson(ChampionDetail instance) =>
@@ -38,6 +40,7 @@ Map<String, dynamic> _$ChampionDetailToJson(ChampionDetail instance) =>
       'allyTips': instance.allyTips,
       'enemyTips': instance.enemyTips,
       'tags': instance.tags,
+      'spells': instance.spells,
       'champInfo': instance.champInfo,
       'stats': instance.stats,
       'passive': instance.passive,
