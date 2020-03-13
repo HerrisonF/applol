@@ -21,12 +21,12 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   var selectedItem = 0;
 
   List children = [
-    //SummonersScreen(),
+    SummonersScreen(),
     //ItensScreen(),
     //GemsScreen(),
     //ChampionsScreen(),
     //ChampionDetailScreen('Rengar'),
-    RunningGame(),
+    //RunningGame(),
   ];
 
   List<Widget> tabItems = List.of([

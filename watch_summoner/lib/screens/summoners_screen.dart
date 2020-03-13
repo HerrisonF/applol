@@ -17,7 +17,6 @@ class _SummonersScreenState extends State<SummonersScreen> {
 
   @override
   void initState() {
-    print('INICIOU A TELA');
     super.initState();
   }
 
@@ -26,17 +25,10 @@ class _SummonersScreenState extends State<SummonersScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
+          color: Colors.amber,
           height: MediaQuery.of(context).size.height - 65,
           padding:
               EdgeInsets.only(top: 64.0, right: 16.0, left: 16.0, bottom: 0),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(
-                  'https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-home/global/default/lcu-article-backdrop.jpg'),
-              fit: BoxFit.fill,
-              colorFilter: ColorFilter.linearToSrgbGamma()
-            ),
-          ),
           child: Column(
             children: <Widget>[
               TextField(

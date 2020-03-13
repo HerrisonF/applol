@@ -77,6 +77,8 @@ class ActiveGameProfileLeft extends StatelessWidget {
       return 'summoner_haste';
     }else if(number==12){
       return 'summoner_teleport';
+    }else if(number==1){
+      return 'summoner_boost';
     }
   }
 }
