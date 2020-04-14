@@ -12,6 +12,7 @@ class ChampionDetail {
   String id;
   String key;
   String name;
+  String alias;
   String title;
   String lore;
   List<String> allyTips;
@@ -25,7 +26,7 @@ class ChampionDetail {
 
   ChampionDetail(this.id, this.key, this.name, this.title, this.lore,
       this.allyTips, this.enemyTips, this.tags, this.champInfo, this.stats,
-      this.passive);
+      this.passive, this.alias);
 
   factory ChampionDetail.fromJson(Map<String, dynamic> json) => _$ChampionDetailFromJson(json);
 
@@ -39,6 +40,7 @@ class ChampionDetail {
     'allyTips': instance.allyTips,
     'enemyTips': instance.enemyTips,
     'info': instance.champInfo,
+    'alias': instance.alias,
     'stats': instance.stats,
     'passive': instance.passive,
     'spells':instance.spells.map((v) => v.toJson()).toList(),

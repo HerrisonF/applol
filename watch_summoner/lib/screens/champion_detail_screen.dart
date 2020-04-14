@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:watch_summoner/components/circular_progress.dart';
 import 'package:watch_summoner/components/spell_text.dart';
 import 'package:watch_summoner/http/http_champion.dart';
@@ -38,7 +37,7 @@ class ChampionDetailScreen extends StatelessWidget {
                         color: Colors.transparent,
                         image: DecorationImage(
                           image: NetworkImage(
-                              'https://raw.communitydragon.org/latest/game/assets/characters/${this.nameChamp.toLowerCase()}/skins/base/${this.nameChamp.toLowerCase()}loadscreen.png'),
+                              'https://raw.communitydragon.org/latest/game/assets/characters/${nameChamp.toLowerCase()}/skins/base/${nameChamp.toLowerCase()}loadscreen.png'),
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -50,10 +49,10 @@ class ChampionDetailScreen extends StatelessWidget {
                           begin: FractionalOffset.topCenter,
                           end: FractionalOffset.bottomCenter,
                           colors: [
-                            Colors.blueGrey.withOpacity(0.0),
+                            Colors.grey.withOpacity(0.0),
                             Colors.black,
                           ],
-                          stops: [0.0, 0.5],
+                          stops: [0.0, 0.4],
                         ),
                       ),
                       child: Column(
@@ -70,10 +69,10 @@ class ChampionDetailScreen extends StatelessWidget {
                                 Column(
                                   children: <Widget>[
                                     Text(
-                                      this.nameChamp,
+                                      snapshot.data.name,
                                       style: TextStyle(
                                         color: Colors.amber,
-                                        fontSize: 32.0,
+                                        fontSize: 26.0,
                                       ),
                                     ),
                                     Text(
@@ -613,18 +612,13 @@ class ChampionDetailScreen extends StatelessWidget {
                           ),
                           Container(
                             child: Image.network(
-                                'http://ddragon.leagueoflegends.com/cdn/10.5.1/img/passive/${snapshot.data.name}_P.png'),
+                                'http://ddragon.leagueoflegends.com/cdn/10.5.1/img/${snapshot.data.passive.image.group}/${snapshot.data.passive.image.full}'),
                           ),
                           Padding(
                             padding: EdgeInsets.all(8.0),
-                            child: Html(
-                              data: utf8.decode(
-                                '${snapshot.data.passive.description.replaceRange(snapshot.data.passive.description.indexOf('<'), snapshot.data.passive.description.indexOf('>') + 1, "")}'
-                                    .runes
-                                    .toList(),
-                              ),
-                              defaultTextStyle: TextStyle(color: Colors.white),
-                            ),
+                            child: Text(getString(snapshot.data.passive.description),style: TextStyle(
+                              color: Colors.white,
+                            ),)
                           ),
                           Container(
                             padding: EdgeInsets.only(top: 8.0),
@@ -649,7 +643,7 @@ class ChampionDetailScreen extends StatelessWidget {
                           ),
                           SpellText(
                               key: Key('championSpell'),
-                              spells: snapshot.data.spells),
+                              spells: snapshot.data.spells, champId: snapshot.data.id.toString()),
                         ],
                       ),
                     )
@@ -662,5 +656,16 @@ class ChampionDetailScreen extends StatelessWidget {
         return Text('unknow Error');
       },
     );
+  }
+
+  String getString(String passive) {
+    if (passive.contains('<')) {
+      return utf8.decode(passive.replaceRange(passive.indexOf('<'),
+          passive.indexOf('>')+1, "").replaceAll('</font>', "").replaceAll('<br>', "")
+          .runes
+          .toList());
+    }else{
+      return utf8.decode(passive.replaceAll('</font>', "").replaceAll('<br>', "").runes.toList());
+    }
   }
 }

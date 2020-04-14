@@ -3,22 +3,23 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:watch_summoner/components/summonerFavorites.dart';
+import 'package:watch_summoner/http/database/database.dart';
+import 'package:watch_summoner/models/summonerFavorite.dart';
+import 'package:watch_summoner/screens/profile_screen.dart';
+import 'package:watch_summoner/screens/running_game_screen.dart';
 
 class SummonersScreen extends StatefulWidget {
   @override
   _SummonersScreenState createState() => _SummonersScreenState();
 }
 
-class _SummonersScreenState extends State<SummonersScreen> {
-  TextEditingController jogoAndamentoController = new TextEditingController();
-  TextEditingController perfilController = new TextEditingController();
-  bool isProfileCheckBox = true;
-  String summonerName = '';
+enum OptionGame { profile, runningGame }
 
-  @override
-  void initState() {
-    super.initState();
-  }
+OptionGame _option = OptionGame.profile;
+
+class _SummonersScreenState extends State<SummonersScreen> {
+  TextEditingController textController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +33,8 @@ class _SummonersScreenState extends State<SummonersScreen> {
           child: Column(
             children: <Widget>[
               TextField(
-                controller: jogoAndamentoController,
+                controller: textController,
                 textInputAction: TextInputAction.search,
-                onSubmitted: (a) {},
                 style: TextStyle(color: Colors.white),
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
@@ -47,14 +47,85 @@ class _SummonersScreenState extends State<SummonersScreen> {
                       color: Colors.white,
                     ),
                     onPressed: () {
-                      print('Clicou no sufixo');
+                      if (_option == OptionGame.profile) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => new ProfileScreen(
+                              summonerName: textController.text,
+                            ),
+                          ),
+                        );
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => new RunningGameScreen(
+                              summonerName: textController.text,
+                            ),
+                          ),
+                        );
+                      }
                     },
                   ),
+                ),
+                onSubmitted: (value){//clique de search no keyboard
+                  if (_option == OptionGame.profile) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => new ProfileScreen(
+                          summonerName: textController.text,
+                        ),
+                      ),
+                    );
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => new RunningGameScreen(
+                          summonerName: textController.text,
+                        ),
+                      ),
+                    );
+                  }
+                },
+              ),
+              Container(
+                margin: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width / 8),
+                child: Row(
+                  children: <Widget>[
+                    Text('Profile'),
+                    Container(
+                      child: Radio(
+                        value: OptionGame.profile,
+                        groupValue: _option,
+                        onChanged: (OptionGame value) {
+                          setState(() {
+                            _option = value;
+                          });
+                        },
+                      ),
+                    ),
+                    Text('Running game'),
+                    Container(
+                      child: Radio(
+                        value: OptionGame.runningGame,
+                        groupValue: _option,
+                        onChanged: (OptionGame value) {
+                          setState(() {
+                            _option = value;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Container(
                 margin: EdgeInsets.only(
-                    top: 32.0, left: 0.0, right: 0.0, bottom: 0.0),
+                    top: 26.0, left: 0.0, right: 0.0, bottom: 0.0),
                 child: Text(
                   'Recents',
                   style: TextStyle(
@@ -63,65 +134,8 @@ class _SummonersScreenState extends State<SummonersScreen> {
                   ),
                 ),
               ),
-              Container(
-                height: MediaQuery.of(context).size.height/1.62,
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: 20,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Card(
-                      margin: EdgeInsets.only(bottom: 30.0),
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            child: ListTile(
-                              leading: Image.network(
-                                'https://raw.communitydragon.org/latest/game/data/images/profileicons/profileicon3584.png',
-                                fit: BoxFit.cover,
-                              ),
-                              title: Stack(
-                                children: <Widget>[
-                                  Container(
-                                    child: Text(
-                                      'Houtebeen',
-                                      style: TextStyle(
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.orange,
-                                        shadows: [
-                                          Shadow(
-                                            blurRadius: 5.0,
-                                            color: Colors.black,
-                                            offset: Offset(1.0, 2.0),
-                                          ),
-                                        ],),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              onTap: () {
-                                //procura o profile, como se tivesse pesquisado
-                              },
-                            ),
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-splashes/201/201003.jpg'),
-                                colorFilter: ColorFilter.linearToSrgbGamma(),
-                                fit: BoxFit.cover,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            height: 70.0,
-                          )
-                        ],
-                      ),
-                      elevation: 8.0,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(11.0)),
-                    );
-                  },
-                ),
+              Expanded(
+                child: SummonerFavorites(_option),
               ),
             ],
           ),

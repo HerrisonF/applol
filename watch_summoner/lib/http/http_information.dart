@@ -9,7 +9,7 @@ import 'package:watch_summoner/models/lastPlayedGame.dart';
 import 'package:watch_summoner/models/ranked.dart';
 import 'package:watch_summoner/models/summoner.dart';
 
-Future<InformationModel> getAllInformation(summonerName) async {
+Future<InformationModel> getAllInformation(String summonerName) async {
   Summoner summoner = new Summoner();
   List<Champion> listMastery = new List();
   List<Ranked> ranked = new List();

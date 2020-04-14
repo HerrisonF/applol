@@ -47,7 +47,7 @@ class _ChampionsScreenState extends State<ChampionsScreen> {
                       )
                     ),
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ChampionDetailScreen(snapshot.data[index].name)));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ChampionDetailScreen(snapshot.data[index].alias)));
                     },
                   );
                 },

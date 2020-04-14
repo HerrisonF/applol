@@ -14,8 +14,8 @@ class Spectator{
   List<Participants> participants;
   List<BannedChampion> bannedChampions;
 
-  Spectator(this.gameId, this.gameMode, this.mapId, this.participants,
-      this.bannedChampions);
+  Spectator({this.gameId, this.gameMode, this.mapId, this.participants,
+      this.bannedChampions});
 
   factory Spectator.fromJson(Map<String, dynamic> json) => _$SpectatorFromJson(json);
 

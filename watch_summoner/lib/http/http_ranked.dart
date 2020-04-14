@@ -14,8 +14,11 @@ Future<List<Ranked>> getRankedStats(String encryptedSummonerId) async {
       return Ranked.fromJson(json);
     },
   ).toList();
+  //Quando o cara não joga tft
+  if(decodedJsonTFT.length > 0){
+    rankeds.add(Ranked.fromJson(decodedJsonTFT[0]));
+  }
 
-  rankeds.add(Ranked.fromJson(decodedJsonTFT[0]));
 
 return rankeds;
 }

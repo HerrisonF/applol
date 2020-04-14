@@ -7,8 +7,9 @@ import 'package:watch_summoner/models/spell.dart';
 
 class SpellText extends StatefulWidget {
   final List<Spell> spells;
+  final String champId;
 
-  const SpellText({Key key, this.spells}) : super(key: key);
+  const SpellText({Key key, this.spells, this.champId}) : super(key: key);
 
   @override
   _SpellTextState createState() => _SpellTextState();
@@ -30,7 +31,7 @@ class _SpellTextState extends State<SpellText> {
             itemBuilder: (BuildContext context, int index) {
               return MaterialButton(
                 child: Image.network(
-                    'https://cdn.communitydragon.org/latest/champion/107/ability-icon/${KeyType.values[index].toString().split('.').last}'),
+                    'https://cdn.communitydragon.org/latest/champion/${widget.champId}/ability-icon/${KeyType.values[index].toString().split('.').last}'),
                 onPressed: () {
                   setState(
                     () {
@@ -47,20 +48,14 @@ class _SpellTextState extends State<SpellText> {
           child: Column(
             children: <Widget>[
               Text(
-                '${widget.spells[indice].name}',
+                widget.spells[indice].name,
                 style: TextStyle(color: Colors.amber, fontSize: 16.0),
               ),
               Container(
                 padding: EdgeInsets.all(8.0),
-                child: Html(
-                  data: utf8.decode(
-                    '${widget.spells[indice].description.replaceRange(widget.spells[indice].description.indexOf('<'), widget.spells[indice].description.indexOf('>')+1, "")}'
-                        .runes
-                        .toList(),
-                  ),
-                  defaultTextStyle: TextStyle(
-                    color: Colors.white,
-                  ),
+                child: Text(
+                  getString(),
+                  style: TextStyle(color: Colors.white),
                 ),
               )
             ],
@@ -68,5 +63,17 @@ class _SpellTextState extends State<SpellText> {
         ),
       ],
     );
+  }
+
+  String getString() {
+    if (widget.spells[indice].description.contains('<')) {
+      return utf8.decode(widget.spells[indice].description
+          .replaceRange(widget.spells[indice].description.indexOf('<'),
+              widget.spells[indice].description.indexOf('>')+1, "").replaceAll('</font>', "").replaceAll('<br>', "")
+          .runes
+          .toList());
+    }else{
+      return utf8.decode(widget.spells[indice].description.replaceAll('</font>', "").replaceAll('<br>', "").runes.toList());
+    }
   }
 }

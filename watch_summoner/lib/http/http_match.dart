@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:watch_summoner/http/config/webclient.dart';
+import 'package:watch_summoner/http/http_summoner.dart';
 import 'package:watch_summoner/models/lastPlayedGame.dart';
 import 'package:watch_summoner/models/spectator.dart';
+import 'package:watch_summoner/models/summoner.dart';
 
 final path = 'lol/match/v4/matchlists/by-account/';
 final pathActiveGame = 'lol/spectator/v4/active-games/by-summoner/';
@@ -24,9 +26,11 @@ Future<List<LastPlayedGame>> getLastPlayedGames(
   ).toList();
 }
 
-Future<Spectator> getRunningGame(String encryptedAccountId) async{
+Future<Spectator> getRunningGame(String summonerName) async {
+  Summoner summoner = await getSummonerCredentials(summonerName);
+
   final Response response = await loggingInterceptor.getInterceptorClient().get(
-    baseUrl+pathActiveGame+encryptedAccountId,
+    baseUrl+pathActiveGame+summoner.id,
     headers: headers,
   ) ;
 

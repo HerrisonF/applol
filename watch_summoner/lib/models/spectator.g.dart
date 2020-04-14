@@ -8,14 +8,14 @@ part of 'spectator.dart';
 
 Spectator _$SpectatorFromJson(Map<String, dynamic> json) {
   return Spectator(
-    json['gameId'] as int,
-    json['gameMode'] as String,
-    json['mapId'] as int,
-    (json['participants'] as List)
+    gameId: json['gameId'] as int,
+    gameMode: json['gameMode'] as String,
+    mapId: json['mapId'] as int,
+    participants: (json['participants'] as List)
         ?.map((e) =>
             e == null ? null : Participants.fromJson(e as Map<String, dynamic>))
         ?.toList(),
-    (json['bannedChampions'] as List)
+    bannedChampions: (json['bannedChampions'] as List)
         ?.map((e) => e == null
             ? null
             : BannedChampion.fromJson(e as Map<String, dynamic>))

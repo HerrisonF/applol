@@ -49,9 +49,8 @@ Future<List<ChampionSummary>> getChampionSummary() async {
 
 Future<ChampionDetail> getChampionDetail(String nameChamp) async {
   final Response response = await loggingInterceptor.getInterceptorClient().get(
-    'http://ddragon.leagueoflegends.com/cdn/10.4.1/data/en_US/champion/${nameChamp}.json'
+    'http://ddragon.leagueoflegends.com/cdn/10.5.1/data/en_US/champion/${nameChamp}.json'
   );
-
   dynamic json = jsonDecode(response.body);
   Map<String, dynamic> json2 = json['data'][nameChamp];
   return ChampionDetail.fromJson(json2);

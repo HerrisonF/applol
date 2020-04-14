@@ -19,6 +19,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  sqflite:
+  path:
   http:
   http_interceptor:
   cupertino_icons: ^0.1.2
@@ -28,6 +30,7 @@ dependencies:
   build_runner: ^1.7.4 #Usados para formatar o json automaticamente
   json_serializable: ^3.2.5 #Usados para formatar o json automaticamente
   intl: 0.15.7 #biblioteca usada para o dateformat
+  shared_preferences: ^0.5.6+3
 
 dev_dependencies:
   flutter_test:
