@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:watch_summoner/components/circular_progress.dart';
+import 'package:watch_summoner/components/removeHtmlTags.dart';
 import 'package:watch_summoner/http/http_gem.dart';
 import 'package:watch_summoner/models/gem.dart';
 
@@ -43,7 +44,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[29].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[29].longDesc)),
                                   ),
                                 ],
                               ),
@@ -54,7 +55,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[22].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[22].longDesc)),
                                   ),
                                 ],
                               ),
@@ -65,7 +66,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[56].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[56].longDesc)),
                                   ),
                                 ],
                               ),
@@ -76,7 +77,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[24].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[24].longDesc)),
                                   ),
                                 ],
                               ),
@@ -87,7 +88,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[95].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[95].longDesc)),
                                   ),
                                 ],
                               ),
@@ -98,7 +99,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[40].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[40].longDesc)),
                                   ),
                                 ],
                               ),
@@ -109,7 +110,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[69].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[69].longDesc)),
                                   ),
                                 ],
                               ),
@@ -120,7 +121,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[71].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[71].longDesc)),
                                   ),
                                 ],
                               ),
@@ -131,7 +132,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[23].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[23].longDesc)),
                                   ),
                                 ],
                               ),
@@ -142,7 +143,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[60].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[60].longDesc)),
                                   ),
                                 ],
                               ),
@@ -153,7 +154,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[54].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[54].longDesc)),
                                   ),
                                 ],
                               ),
@@ -164,7 +165,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[26].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[26].longDesc)),
                                   ),
                                 ],
                               ),
@@ -175,7 +176,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[7].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[7].longDesc)),
                                   ),
                                 ],
                               ),
@@ -195,7 +196,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[8].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[8].longDesc)),
                                   ),
                                 ],
                               ),
@@ -206,7 +207,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[85].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[85].longDesc)),
                                   ),
                                 ],
                               ),
@@ -217,7 +218,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[13].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[13].longDesc)),
                                   ),
                                 ],
                               ),
@@ -228,7 +229,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[83].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[83].longDesc)),
                                   ),
                                 ],
                               ),
@@ -239,7 +240,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[1].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[1].longDesc)),
                                   ),
                                 ],
                               ),
@@ -250,7 +251,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[20].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[20].longDesc)),
                                   ),
                                 ],
                               ),
@@ -261,7 +262,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[78].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[78].longDesc)),
                                   ),
                                 ],
                               ),
@@ -272,7 +273,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[88].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[88].longDesc)),
                                   ),
                                 ],
                               ),
@@ -283,7 +284,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[35].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[35].longDesc)),
                                   ),
                                 ],
                               ),
@@ -294,7 +295,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[76].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[76].longDesc)),
                                   ),
                                 ],
                               ),
@@ -305,7 +306,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[5].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[5].longDesc)),
                                   ),
                                 ],
                               ),
@@ -316,7 +317,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[36].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[36].longDesc)),
                                   ),
                                 ],
                               ),
@@ -327,7 +328,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[41].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[41].longDesc)),
                                   ),
                                 ],
                               ),
@@ -338,7 +339,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[25].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[25].longDesc)),
                                   ),
                                 ],
                               ),
@@ -358,7 +359,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[18].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[18].longDesc)),
                                   ),
                                 ],
                               ),
@@ -369,7 +370,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[93].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[93].longDesc)),
                                   ),
                                 ],
                               ),
@@ -380,7 +381,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[62].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[62].longDesc)),
                                   ),
                                 ],
                               ),
@@ -391,7 +392,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[27].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[27].longDesc)),
                                   ),
                                 ],
                               ),
@@ -402,7 +403,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[57].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[57].longDesc)),
                                   ),
                                 ],
                               ),
@@ -413,7 +414,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[43].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[43].longDesc)),
                                   ),
                                 ],
                               ),
@@ -424,7 +425,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[28].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[28].longDesc)),
                                   ),
                                 ],
                               ),
@@ -435,7 +436,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[9].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[9].longDesc)),
                                   ),
                                 ],
                               ),
@@ -446,7 +447,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[86].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[86].longDesc)),
                                   ),
                                 ],
                               ),
@@ -457,7 +458,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[19].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[19].longDesc)),
                                   ),
                                 ],
                               ),
@@ -468,7 +469,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[6].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[6].longDesc)),
                                   ),
                                 ],
                               ),
@@ -479,7 +480,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[68].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[68].longDesc)),
                                   ),
                                 ],
                               ),
@@ -499,7 +500,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[82].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[82].longDesc)),
                                   ),
                                 ],
                               ),
@@ -510,7 +511,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[45].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[45].longDesc)),
                                   ),
                                 ],
                               ),
@@ -521,7 +522,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[75].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[75].longDesc)),
                                   ),
                                 ],
                               ),
@@ -532,7 +533,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[0].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[0].longDesc)),
                                   ),
                                 ],
                               ),
@@ -543,7 +544,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[65].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[65].longDesc)),
                                   ),
                                 ],
                               ),
@@ -554,7 +555,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[39].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[39].longDesc)),
                                   ),
                                 ],
                               ),
@@ -565,7 +566,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[84].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[84].longDesc)),
                                   ),
                                 ],
                               ),
@@ -576,7 +577,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[80].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[80].longDesc)),
                                   ),
                                 ],
                               ),
@@ -587,7 +588,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[16].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[16].longDesc)),
                                   ),
                                 ],
                               ),
@@ -598,7 +599,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[58].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[58].longDesc)),
                                   ),
                                 ],
                               ),
@@ -609,7 +610,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[10].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[10].longDesc)),
                                   ),
                                 ],
                               ),
@@ -620,7 +621,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[38].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[38].longDesc)),
                                   ),
                                 ],
                               ),
@@ -640,7 +641,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[37].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[37].longDesc)),
                                   ),
                                 ],
                               ),
@@ -651,7 +652,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[11].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[11].longDesc)),
                                   ),
                                 ],
                               ),
@@ -662,7 +663,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[89].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[89].longDesc)),
                                   ),
                                 ],
                               ),
@@ -673,7 +674,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[74].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[74].longDesc)),
                                   ),
                                 ],
                               ),
@@ -684,7 +685,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[67].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[67].longDesc)),
                                   ),
                                 ],
                               ),
@@ -695,7 +696,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[59].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[59].longDesc)),
                                   ),
                                 ],
                               ),
@@ -706,7 +707,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[2].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[2].longDesc)),
                                   ),
                                 ],
                               ),
@@ -717,7 +718,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[64].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[64].longDesc)),
                                   ),
                                 ],
                               ),
@@ -728,7 +729,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[79].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[79].longDesc)),
                                   ),
                                 ],
                               ),
@@ -739,7 +740,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[91].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[91].longDesc)),
                                   ),
                                 ],
                               ),
@@ -750,7 +751,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[4].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[4].longDesc)),
                                   ),
                                 ],
                               ),
@@ -761,7 +762,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[33].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[33].longDesc)),
                                   ),
                                 ],
                               ),
@@ -784,7 +785,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[49].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[49].longDesc)),
                                   ),
                                 ],
                               ),
@@ -795,7 +796,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[47].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[47].longDesc)),
                                   ),
                                 ],
                               ),
@@ -806,7 +807,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[34].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[34].longDesc)),
                                   ),
                                 ],
                               ),
@@ -817,7 +818,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[55].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[55].longDesc)),
                                   ),
                                 ],
                               ),
@@ -828,7 +829,7 @@ class _GemsScreenState extends State<GemsScreen> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Text(snapshot.data[52].longDesc),
+                                    child: Text(removeAllHtmlTags(snapshot.data[52].longDesc)),
                                   ),
                                 ],
                               ),
@@ -840,7 +841,7 @@ class _GemsScreenState extends State<GemsScreen> {
               );
               break;
           }
-          return Text('Unknown Error');
+          return Text('Erro Desconhecido');
         });
   }
 }

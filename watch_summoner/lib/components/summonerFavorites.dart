@@ -4,7 +4,7 @@ import 'package:watch_summoner/http/database/dao/daoSummonerFavorite.dart';
 import 'package:watch_summoner/models/summonerFavorite.dart';
 import 'package:watch_summoner/screens/profile_screen.dart';
 import 'package:watch_summoner/screens/running_game_screen.dart';
-import 'package:watch_summoner/screens/summoners_screen.dart';
+import 'package:watch_summoner/screens/find_screen.dart';
 
 class SummonerFavorites extends StatefulWidget {
   @override

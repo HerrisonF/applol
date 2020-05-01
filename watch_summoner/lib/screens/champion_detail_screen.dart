@@ -3,19 +3,21 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:watch_summoner/components/circular_progress.dart';
+import 'package:watch_summoner/components/removeHtmlTags.dart';
 import 'package:watch_summoner/components/spell_text.dart';
 import 'package:watch_summoner/http/http_champion.dart';
 import 'package:watch_summoner/models/championDetail.dart';
 
 class ChampionDetailScreen extends StatelessWidget {
   String nameChamp;
+  String version;
 
-  ChampionDetailScreen(this.nameChamp);
+  ChampionDetailScreen(this.nameChamp, this.version);
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<ChampionDetail>(
-      future: getChampionDetail(nameChamp),
+      future: getChampionDetail(nameChamp, version),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
@@ -37,11 +39,11 @@ class ChampionDetailScreen extends StatelessWidget {
                         color: Colors.transparent,
                         image: DecorationImage(
                           image: NetworkImage(
-                              'https://raw.communitydragon.org/latest/game/assets/characters/${nameChamp.toLowerCase()}/skins/base/${nameChamp.toLowerCase()}loadscreen.png'),
+                              'http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${nameChamp}_0.jpg'),
                           fit: BoxFit.fill,
                         ),
                       ),
-                    ),
+                    ), //Imagem de fundo
                     Container(
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
@@ -54,7 +56,7 @@ class ChampionDetailScreen extends StatelessWidget {
                           ],
                           stops: [0.0, 0.4],
                         ),
-                      ),
+                      ), //Degradê
                       child: Column(
                         children: <Widget>[
                           Padding(
@@ -92,7 +94,7 @@ class ChampionDetailScreen extends StatelessWidget {
                                     children: <Widget>[
                                       Image.network(
                                         'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_2_${snapshot.data.tags[0].toLowerCase()}.png',
-                                      ),
+                                      ), //Icone da role
                                       Text(
                                         'Role',
                                         style: TextStyle(
@@ -109,7 +111,7 @@ class ChampionDetailScreen extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                ),
+                                ), //Role
                               ],
                             ),
                           ),
@@ -121,7 +123,7 @@ class ChampionDetailScreen extends StatelessWidget {
                               child: Image.network(
                                   'https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-uikit/global/default/images/celebration-linework-mid.png'),
                             ),
-                          ),
+                          ), //Linha divisória(Textura)
                           Center(
                             child: Padding(
                               padding: EdgeInsets.only(bottom: 16.0),
@@ -612,11 +614,11 @@ class ChampionDetailScreen extends StatelessWidget {
                           ),
                           Container(
                             child: Image.network(
-                                'http://ddragon.leagueoflegends.com/cdn/10.5.1/img/${snapshot.data.passive.image.group}/${snapshot.data.passive.image.full}'),
-                          ),
+                                'http://ddragon.leagueoflegends.com/cdn/$version/img/${snapshot.data.passive.image.group}/${snapshot.data.passive.image.full}'),
+                          ), //Imagem da passiva
                           Padding(
                             padding: EdgeInsets.all(8.0),
-                            child: Text(getString(snapshot.data.passive.description),style: TextStyle(
+                            child: Text(removeAllHtmlTags(snapshot.data.passive.description),style: TextStyle(
                               color: Colors.white,
                             ),)
                           ),
@@ -653,19 +655,8 @@ class ChampionDetailScreen extends StatelessWidget {
             );
             break;
         }
-        return Text('unknow Error');
+        return Text('Erro desconhecido');
       },
     );
-  }
-
-  String getString(String passive) {
-    if (passive.contains('<')) {
-      return utf8.decode(passive.replaceRange(passive.indexOf('<'),
-          passive.indexOf('>')+1, "").replaceAll('</font>', "").replaceAll('<br>', "")
-          .runes
-          .toList());
-    }else{
-      return utf8.decode(passive.replaceAll('</font>', "").replaceAll('<br>', "").runes.toList());
-    }
   }
 }

@@ -1,24 +1,20 @@
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:watch_summoner/components/summonerFavorites.dart';
-import 'package:watch_summoner/http/database/database.dart';
-import 'package:watch_summoner/models/summonerFavorite.dart';
 import 'package:watch_summoner/screens/profile_screen.dart';
 import 'package:watch_summoner/screens/running_game_screen.dart';
 
-class SummonersScreen extends StatefulWidget {
+class FindScreen extends StatefulWidget {
   @override
-  _SummonersScreenState createState() => _SummonersScreenState();
+  _FindScreenState createState() => _FindScreenState();
 }
 
 enum OptionGame { profile, runningGame }
 
 OptionGame _option = OptionGame.profile;
 
-class _SummonersScreenState extends State<SummonersScreen> {
+class _FindScreenState extends State<FindScreen> {
   TextEditingController textController = new TextEditingController();
 
   @override
@@ -27,7 +23,7 @@ class _SummonersScreenState extends State<SummonersScreen> {
       body: SingleChildScrollView(
         child: Container(
           color: Colors.amber,
-          height: MediaQuery.of(context).size.height - 65,
+          height: MediaQuery.of(context).size.height - 60, // O -60 vem do tamanho da TabBar
           padding:
               EdgeInsets.only(top: 64.0, right: 16.0, left: 16.0, bottom: 0),
           child: Column(
@@ -35,16 +31,14 @@ class _SummonersScreenState extends State<SummonersScreen> {
               TextField(
                 controller: textController,
                 textInputAction: TextInputAction.search,
-                style: TextStyle(color: Colors.white),
-                cursorColor: Colors.white,
+                cursorColor: Theme.of(context).accentColor,
                 decoration: InputDecoration(
-                  hintText: 'Summoner Name',
+                  hintText: 'Nome de invocador',
                   border: OutlineInputBorder(),
-                  hintStyle: TextStyle(color: Colors.white),
                   suffixIcon: IconButton(
                     icon: Icon(
                       Icons.search,
-                      color: Colors.white,
+                      color: Theme.of(context).accentColor,
                     ),
                     onPressed: () {
                       if (_option == OptionGame.profile) {
@@ -69,7 +63,8 @@ class _SummonersScreenState extends State<SummonersScreen> {
                     },
                   ),
                 ),
-                onSubmitted: (value){//clique de search no keyboard
+                onSubmitted: (value) {
+                  //clique de search no keyboard
                   if (_option == OptionGame.profile) {
                     Navigator.push(
                       context,
@@ -90,53 +85,61 @@ class _SummonersScreenState extends State<SummonersScreen> {
                     );
                   }
                 },
-              ),
+              ), //Caixa de Texto para a pesquisa de invocador
               Container(
                 margin: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width / 8),
+                    left: MediaQuery.of(context).size.width / 7, right: MediaQuery.of(context).size.width/7),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text('Profile'),
                     Container(
-                      child: Radio(
-                        value: OptionGame.profile,
-                        groupValue: _option,
-                        onChanged: (OptionGame value) {
-                          setState(() {
-                            _option = value;
-                          });
-                        },
+                      child: Row(
+                        children: <Widget>[
+                          Text('Perfil'),
+                          Radio(
+                            value: OptionGame.profile,
+                            groupValue: _option,
+                            onChanged: (OptionGame value) {
+                              setState(() {
+                                _option = value;
+                              });
+                            },
+                          ),
+                        ],
                       ),
                     ),
-                    Text('Running game'),
                     Container(
-                      child: Radio(
-                        value: OptionGame.runningGame,
-                        groupValue: _option,
-                        onChanged: (OptionGame value) {
-                          setState(() {
-                            _option = value;
-                          });
-                        },
+                      child: Row(
+                        children: <Widget>[
+                          Text('Partida'),
+                          Radio(
+                            value: OptionGame.runningGame,
+                            groupValue: _option,
+                            onChanged: (OptionGame value) {
+                              setState(() {
+                                _option = value;
+                              });
+                            },
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
-              ),
+              ),// Linha com os Radios
               Container(
                 margin: EdgeInsets.only(
                     top: 26.0, left: 0.0, right: 0.0, bottom: 0.0),
                 child: Text(
-                  'Recents',
+                  'Recentes',
                   style: TextStyle(
-                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
+              ), // Linha com o texto recentes
               Expanded(
                 child: SummonerFavorites(_option),
-              ),
+              ), //Linha contendo a Lista de recentes
             ],
           ),
         ),

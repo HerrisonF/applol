@@ -1,12 +1,10 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
 import 'Interceptor.dart';
 
 final String baseUrl = 'https://br1.api.riotgames.com/';
-final String token = 'RGAPI-908a96dc-bca5-4a7b-b7b9-03e258a831d9';
+final String token = 'RGAPI-2b15a8df-dda9-4452-9876-984032447537';
 final LoggingInterceptor loggingInterceptor = new LoggingInterceptor();
 
 final Map<String, String> headers = {

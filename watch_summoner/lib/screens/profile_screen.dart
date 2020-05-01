@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:watch_summoner/components/circular_progress.dart';
 import 'package:watch_summoner/components/profile_screen_component.dart';
-import 'package:watch_summoner/http/database/database.dart';
 import 'package:watch_summoner/http/http_information.dart';
 import 'package:watch_summoner/models/informationModel.dart';
 import 'package:watch_summoner/models/summonerFavorite.dart';
@@ -33,7 +32,7 @@ class ProfileScreen extends StatelessWidget {
             return ProfileScreenComponent(snapshot.data);
             break;
         }
-        return Text('Unknown Error');
+        return Text('Erro Desconhecido');
       },
     );
   }

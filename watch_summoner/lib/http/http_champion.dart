@@ -47,11 +47,20 @@ Future<List<ChampionSummary>> getChampionSummary() async {
   }).toList();
 }
 
-Future<ChampionDetail> getChampionDetail(String nameChamp) async {
+Future<ChampionDetail> getChampionDetail(String nameChamp, String version) async {
+  String newString = nameChamp;
+
+  //Por conta da inconsistência de dados vindos da Riot, esse IF se fez necessário, mesmo sendo uma gambiarra
+  if(nameChamp == "FiddleSticks"){
+    newString = 'Fiddlesticks';
+  }
+
   final Response response = await loggingInterceptor.getInterceptorClient().get(
-    'http://ddragon.leagueoflegends.com/cdn/10.5.1/data/en_US/champion/${nameChamp}.json'
+      'http://ddragon.leagueoflegends.com/cdn/10.9.1/data/pt_BR/champion/${newString}.json'
   );
+
   dynamic json = jsonDecode(response.body);
-  Map<String, dynamic> json2 = json['data'][nameChamp];
+  Map<String, dynamic> json2 = json['data'][newString];
+
   return ChampionDetail.fromJson(json2);
 }

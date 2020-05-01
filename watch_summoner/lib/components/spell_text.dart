@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
+import 'package:path/path.dart';
+import 'package:watch_summoner/components/removeHtmlTags.dart';
 import 'package:watch_summoner/models/spell.dart';
 
 class SpellText extends StatefulWidget {
@@ -53,27 +54,12 @@ class _SpellTextState extends State<SpellText> {
               ),
               Container(
                 padding: EdgeInsets.all(8.0),
-                child: Text(
-                  getString(),
-                  style: TextStyle(color: Colors.white),
-                ),
+                child: Text(removeAllHtmlTags(widget.spells[indice].description), style: TextStyle(color: Colors.white),),
               )
             ],
           ),
         ),
       ],
     );
-  }
-
-  String getString() {
-    if (widget.spells[indice].description.contains('<')) {
-      return utf8.decode(widget.spells[indice].description
-          .replaceRange(widget.spells[indice].description.indexOf('<'),
-              widget.spells[indice].description.indexOf('>')+1, "").replaceAll('</font>', "").replaceAll('<br>', "")
-          .runes
-          .toList());
-    }else{
-      return utf8.decode(widget.spells[indice].description.replaceAll('</font>', "").replaceAll('<br>', "").runes.toList());
-    }
   }
 }
